@@ -271,6 +271,7 @@ class UQDiffusion(Diffusion):
         cov_num_sample: int = 10,
         num_steps: int = 50,
         log_intermediate: bool = True,
+        log_activations: bool = True,
     ) -> Tuple[Tensor, Tensor]:
         """
         Iteratively sample from the model using DDIM with uncertainty tracking.
@@ -311,8 +312,12 @@ class UQDiffusion(Diffusion):
             t = step_indices[i].expand(batch_size)
 
             # Get noise prediction and its variance
-            eps_mean, eps_var = model(x_t, t, y=y)
+            eps_mean, eps_var, feats = model(x_t, t, y=y)
             eps_t = eps_mean + torch.sqrt(eps_var) * torch.randn_like(eps_mean)
+
+            if log_activations:
+                feats_flat = feats.view(feats.size(0), -1).cpu()  # Shape: [B, D]
+                torch.save(feats_flat, f"activations/step_{i}.pt")
 
             # Current timestep parameters
             alpha_t = alphas_bar[i].view(-1, 1, 1, 1)

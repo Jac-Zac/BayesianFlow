@@ -1,6 +1,8 @@
+import glob
 import logging
 import os
 import random
+import re
 from typing import Optional
 
 import numpy as np
@@ -169,3 +171,17 @@ def load_pretrained_model(
 
     logger.info("✅ Model weights loaded successfully")
     return model
+
+
+def load_activations_by_timestep(activations_dir):
+    activations_by_timestep = {}
+
+    for filename in os.listdir(activations_dir):
+        if filename.startswith("step_") and filename.endswith(".pt"):
+            step_str = filename.split("_")[1].split(".")[0]
+            step = int(step_str)
+            path = os.path.join(activations_dir, filename)
+            activations = torch.load(path)  # Shape [B, D]
+            activations_by_timestep[step] = activations
+
+    return activations_by_timestep

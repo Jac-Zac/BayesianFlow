@@ -98,32 +98,19 @@ class LaplaceApproxModel(nn.Module):
         self.conv_out_la.n_data += N
 
     def forward(self, x, t, y=None):
-        """
-        Forward pass using the Laplace-approximated model.
-        Returns both predictive mean and variance for uncertainty estimation.
-        """
         self.feature_extractor.eval()
         with torch.no_grad():
             feats = self.feature_extractor(x, t, y=y)
 
-        # Predictive mean and variance via Monte Carlo approximation
-        # # NOTE: 100 is the number of samples showed in the paper
-        # # WARNING: Potentially this could be change we need to think about this !
-        # # No need for MC perhaps ?
-        # mean, var = self.conv_out_la(
-        #     feats, pred_type="nn", link_approx="mc", n_samples=100
-        # )
-
-        # Take the diagonal only of the close form
         mean, var = self.conv_out_la(feats, pred_type="glm", diagonal_output=True)
 
-        # Reshape [B, 784] -> [B, 1, 28, 28] for image-shaped output
         B = x.size(0)
         img_size = self.config.data.image_size
         mean = mean.view(B, 1, img_size, img_size)
         var = var.view(B, 1, img_size, img_size)
 
-        return mean, var
+        # Return activations as well
+        return mean, var, feats
 
     def accurate_forward(self, x, t, y=None):
         """

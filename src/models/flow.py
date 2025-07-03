@@ -194,6 +194,7 @@ class UQFlowMatching(FlowMatching):
         cov_num_sample: int = 100,
         num_steps: int = 10,
         log_intermediate: bool = True,
+        log_activations: bool = True,
     ) -> Tuple[Tensor, Tensor]:
         """
         Sample with uncertainty tracking and Cov(x, v) estimation.
@@ -220,7 +221,11 @@ class UQFlowMatching(FlowMatching):
             t = torch.full((batch_size,), i * dt, device=self.device, dtype=torch.long)
 
             # Predict noise and its variance
-            v_mean, v_var = model(x_t, t, y=y)  # mean and variance of noise
+            v_mean, v_var, feats = model(x_t, t, y=y)  # mean and variance of noise
+
+            if log_activations:
+                feats_flat = feats.view(feats.size(0), -1).cpu()  # Shape: [B, D]
+                torch.save(feats_flat, f"activations/step_{i}.pt")
 
             v_t = v_mean + torch.sqrt(v_var) * torch.randn_like(v_mean)
             x_succ = x_t + dt * v_t
