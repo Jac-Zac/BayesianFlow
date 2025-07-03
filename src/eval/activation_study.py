@@ -1,7 +1,6 @@
 import argparse
 import os
 import shutil
-from collections import OrderedDict
 from types import SimpleNamespace
 
 import matplotlib.pyplot as plt
@@ -158,8 +157,10 @@ def main():
             activations.cpu().numpy(), verbose=False
         )
         id_values.append(id_est)
-        timesteps.append(i / (len(timestep_keys) - 1))  # normalized [0, 1]
+        timesteps.append(i)
         print(f"Normalized Timestep {i}: Intrinsic Dimensionality = {id_est:.2f}")
+
+    plt.rcParams["figure.dpi"] = 300
 
     # Plot
     plt.figure(figsize=(6, 4))
