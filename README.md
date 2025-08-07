@@ -4,7 +4,7 @@
 
 ![showcase](.assets/diagram.png)
 
-This project introduces BayesianFlow, an approach for estimating pixel-wise uncertainty in generated images, extending the principles of BayesDiff, presented in the paper "BayesDiff: Estimating Pixel-wise Uncertainty in Diffusion via Bayesian Inference" to the more efficient Flow Matching generative models. We leverage the Last Layer Laplace Approximation to quantify uncertainty during the generative process, providing nice and interpretable uncertainty maps. Our experiments demonstrate the effectiveness of BayesFlow on widely used datasets such as MNIST and Fashion-MNIST.
+This project introduces BayesianFlow, an approach for estimating pixel-wise uncertainty in generated images, extending the principles of BayesDiff, presented in the paper "BayesDiff: Estimating Pixel-wise Uncertainty in Diffusion via Bayesian Inference" to the more efficient Flow Matching generative models. We leverage the Last Layer Laplace Approximation to quantify uncertainty during the generative process, providing nice and interpretable uncertainty maps. Our experiments demonstrate the effectiveness of BayesianFlow on widely used datasets such as MNIST and Fashion-MNIST.
 
 ## Key Features
 
@@ -42,7 +42,7 @@ Our approach centers on extending uncertainty estimation to Flow Matching models
 
 ## Experiments & Results
 
-We conducted experiments on the MNIST and Fashion-MNIST datasets to evaluate BayesFlow. Our findings demonstrate the ability to generate coherent pixel-wise uncertainty maps for both datasets. Visual comparisons highlight the differences in uncertainty behavior between Flow Matching and Diffusion models, providing insights into the benefits of our approach. The sum of pixel uncertainties over time further illustrates these distinctions across methods.
+We conducted experiments on the MNIST and Fashion-MNIST datasets to evaluate BayesianFlow. Our findings demonstrate the ability to generate coherent pixel-wise uncertainty maps for both datasets. Visual comparisons highlight the differences in uncertainty behavior between Flow Matching and Diffusion models, providing insights into the benefits of our approach. The sum of pixel uncertainties over time further illustrates these distinctions across methods.
 
 [Training Runs Report](https://api.wandb.ai/links/jac-zac/h0ack55v)
 
