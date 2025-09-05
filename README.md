@@ -128,6 +128,21 @@ python -m src.eval.generate --n 10
 └── requirements.txt
 ```
 
+## 🔮 Future Work and Development
+
+This project is actively evolving with exciting research directions ahead:
+
+- **[📋 FUTURE_WORK.md](FUTURE_WORK.md)**: Comprehensive future research directions and improvements
+- **[🗺️ ROADMAP.md](ROADMAP.md)**: Development roadmap and timeline
+- **[📝 notes.md](notes.md)**: Technical notes and implementation details
+
+### Key Areas for Extension
+- 🎨 **Higher Resolution & RGB Images**: Beyond MNIST to complex, colorful datasets
+- 🏗️ **Modern Architectures**: Transformer-based uncertainty estimation 
+- 🏥 **Real-World Applications**: Medical imaging, safety-critical systems
+- ⚡ **Performance Optimization**: Efficient uncertainty propagation
+- 🤖 **Modern Model Integration**: Stable Diffusion, multi-modal uncertainty
+
 ## References
 
 - _Kou, S., Gan, L., Wang, D., Li, C., & Deng, Z. (2023). BayesDiff: Estimating Pixel-wise Uncertainty in Diffusion via Bayesian Inference. arXiv:2310.11142_
